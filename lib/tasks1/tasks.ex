@@ -37,6 +37,14 @@ defmodule Tasks1.Tasks do
   """
   def get_task!(id), do: Repo.get!(Task, id)
 
+
+  def get_task(id) do
+    q = from t in Task,
+        where: t.id == ^id,
+        preload: [:assignee]
+    Repo.one(q)
+  end
+
   @doc """
   Creates a task.
 

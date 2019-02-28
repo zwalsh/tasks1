@@ -8,7 +8,7 @@ defmodule Tasks1.Tasks.Task do
     field :desc, :string
     field :time_taken, :integer
     field :title, :string
-    belongs_to :user_id, Tasks1.Users.User, foreign_key: :assignee_id, references: :id
+    belongs_to :assignee, Tasks1.Users.User, foreign_key: :assignee_id
 
     timestamps()
   end

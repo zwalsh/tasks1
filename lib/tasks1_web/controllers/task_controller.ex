@@ -27,14 +27,27 @@ defmodule Tasks1Web.TaskController do
   end
 
   def show(conn, %{"id" => id}) do
-    task = Tasks.get_task!(id)
-    render(conn, "show.html", task: task)
+    task = Tasks.get_task(id)
+    if task do
+      render(conn, "show.html", task: task)
+    else
+      conn
+      |> put_flash(:error, "Task with id: #{id} does not exist")
+      |> redirect(to: Routes.task_path(conn, :index))
+    end
   end
 
   def edit(conn, %{"id" => id}) do
-    task = Tasks.get_task!(id)
-    changeset = Tasks.change_task(task)
-    render(conn, "edit.html", task: task, changeset: changeset)
+    task = Tasks.get_task(id)
+    if task do
+      conn = assign(conn, :users, Tasks1.Users.list_users())
+      changeset = Tasks.change_task(task)
+      render(conn, "edit.html", task: task, changeset: changeset)
+    else
+      conn
+      |> put_flash(:error, "Task with id: #{id} does not exist")
+      |> redirect(to: Routes.task_path(conn, :index))
+    end
   end
 
   def update(conn, %{"id" => id, "task" => task_params}) do

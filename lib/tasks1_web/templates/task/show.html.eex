@@ -1,14 +1,13 @@
-<h1>Show Task</h1>
+<h1>Task: <%= @task.title %></h1>
+<%= if @task.assignee do %>
+  <h2> Assignee: <%= @task.assignee.email %></h2>
+<% else %>
+  <h2>Unassigned</h2>
+<% end %>
 
 <ul>
-
   <li>
-    <strong>Title:</strong>
-    <%= @task.title %>
-  </li>
-
-  <li>
-    <strong>Desc:</strong>
+    <strong>Description:</strong>
     <%= @task.desc %>
   </li>
 
