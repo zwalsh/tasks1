@@ -4,20 +4,30 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Tasks1 · Phoenix Framework</title>
+    <title>Tasks1</title>
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
   </head>
   <body>
     <header>
       <section class="container">
         <nav role="navigation">
-          <ul>
-            <li><a href="https://hexdocs.pm/phoenix/overview.html">Get Started</a></li>
-          </ul>
+          <%# taken from Nat Tuck's session impl: https://khoury.neu.edu/~ntuck/courses/2019/01/cs4550/notes/11-add-users/notes.html %>
+          <div class="col-6">
+            <%= if @current_user do %>
+            <p class="my-3">
+              User: <%= @current_user.email %>
+              <%= link("Logout", to: Routes.session_path(@conn, :delete),
+              method: :delete) %>
+            </p>
+            <% else %>
+              <%= form_for @conn, Routes.session_path(@conn, :create),
+                [class: "form-inline"], fn f -> %>
+                  <%= text_input f, :email, class: "form-control" %>
+                  <%= submit "Login", class: "btn btn-secondary" %>
+                <% end %>
+            <% end %>
+         </div>
         </nav>
-        <a href="http://phoenixframework.org/" class="phx-logo">
-          <img src="<%= Routes.static_path(@conn, "/images/phoenix.png") %>" alt="Phoenix Framework Logo"/>
-        </a>
       </section>
     </header>
     <main role="main" class="container">

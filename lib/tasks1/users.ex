@@ -37,6 +37,13 @@ defmodule Tasks1.Users do
   """
   def get_user!(id), do: Repo.get!(User, id)
 
+  # taken from Nat Tuck's users impl: https://khoury.neu.edu/~ntuck/courses/2019/01/cs4550/notes/11-add-users/notes.html
+  def get_user(id), do: Repo.get(User, id)
+
+  def get_user_by_email(email) do
+    Repo.get_by(User, email: email)
+  end
+
   @doc """
   Creates a user.
 
