@@ -10,26 +10,29 @@
   </head>
   <body>
     <header>
-      <section class="container">
-        <nav role="navigation">
-          <%# taken from Nat Tuck's session impl: https://khoury.neu.edu/~ntuck/courses/2019/01/cs4550/notes/11-add-users/notes.html %>
-          <div class="col-6">
-            <%= if @current_user do %>
-            <p class="my-3">
-              User: <%= @current_user.email %>
-              <%= link("Logout", to: Routes.session_path(@conn, :delete),
-              method: :delete) %>
-            </p>
-            <% else %>
-              <%= form_for @conn, Routes.session_path(@conn, :create),
-                [class: "form-inline"], fn f -> %>
-                  <%= text_input f, :email, class: "form-control" %>
-                  <%= submit "Login", class: "btn btn-secondary" %>
-                <% end %>
-            <% end %>
-         </div>
-        </nav>
-      </section>
+      <%# taken from Nat Tuck's session impl: https://khoury.neu.edu/~ntuck/courses/2019/01/cs4550/notes/11-add-users/notes.html %>
+      <div class="container">
+        <div class="row">
+          <%= if @current_user do %>
+          <div class="col">
+            <p class="my-3"> User: <%= @current_user.email %> </p>
+          </div>
+          <div class="col">
+            <%= link "Logout",
+                      to: Routes.session_path(@conn, :delete),
+                      method: :delete,
+                      class: ["my-3 align-right"] %>
+          </div>
+         <% else %>
+          <div class="col">
+           <%= form_for @conn, Routes.session_path(@conn, :create),
+             [class: "form-inline"], fn f -> %>
+               <%= text_input f, :email, class: "form-control" %>
+               <%= submit "Login", class: "btn btn-secondary" %>
+             <% end %>
+           </div>
+         <% end %>
+       </div>
     </header>
     <main role="main" class="container">
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>

@@ -8,15 +8,15 @@
       </div>
     </div>
     <div class="row">
-      <h1>Helpful Links</h1>
+      <div class="col">
+        <h1>Helpful Links</h1>
+      </div>
     </div>
     <div class="row">
-      <div class="col">
-        <%= link "See all users", to: Routes.user_path(@conn, :index) %>
-      </div>
-      <div class="col">
-        <%= link "See all users", to: Routes.user_path(@conn, :index) %>
-      </div>
+      <ul>
+        <li><%= link "See all users", to: Routes.user_path(@conn, :index) %></li>
+        <li><%= link "See all tasks", to: Routes.task_path(@conn, :index) %></li>
+      </ul>
     </div>
   </div>
 <% else %>
