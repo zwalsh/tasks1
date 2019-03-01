@@ -1,10 +1,13 @@
-<h1>Show User</h1>
+<h1>User:</h1>
 
 <ul>
 
   <li>
     <strong>Email:</strong>
     <%= @user.email %>
+  </li>
+  <li>
+    <%= link "User's Tasks", to: "/tasks/personal?user_id=#{@user.id}" %> 
   </li>
 
 </ul>

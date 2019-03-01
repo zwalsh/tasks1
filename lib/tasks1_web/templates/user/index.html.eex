@@ -6,6 +6,9 @@
       <th>Email</th>
 
       <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -15,8 +18,15 @@
 
       <td>
         <%= link "Show", to: Routes.user_path(@conn, :show, user) %>
+      </td>
+      <td>
         <%= link "Edit", to: Routes.user_path(@conn, :edit, user) %>
+      </td>
+      <td>
         <%= link "Delete", to: Routes.user_path(@conn, :delete, user), method: :delete, data: [confirm: "Are you sure?"] %>
+      </td>
+      <td>
+        <%= link "Tasks", to: "/tasks/personal?user_id=#{user.id}" %>
       </td>
     </tr>
 <% end %>
