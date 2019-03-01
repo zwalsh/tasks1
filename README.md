@@ -1,20 +1,16 @@
 # Tasks1
 
-To start your Phoenix server:
+This is a task tracker app! Here are some of the design decisions I made:
 
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.setup`
-  * Install Node.js dependencies with `cd assets && npm install`
-  * Start Phoenix endpoint with `mix phx.server`
+- adding an assignee involves selecting a user from a dropdown
+  - this means that all users must be fetched to edit a task...
+   hopefully my app does not become too popular
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+- I decided not to add a separate "complete" feature, so completing a task means
+manually editing it, checking the completed box, and setting time_taken.
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+- it is also necessary to always input a time taken, even when creating the
+task. I could not find a good way to separate those concerns.
 
-## Learn more
-
-  * Official website: http://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Mailing list: http://groups.google.com/group/phoenix-talk
-  * Source: https://github.com/phoenixframework/phoenix
+- It *is* possible to view all of an individual user's tasks through /tasks/personal, and that
+path accepts a parameter of user_id. That is linked on the Users page as well.
