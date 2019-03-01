@@ -13,14 +13,16 @@
 
   <li>
     <strong>Completed:</strong>
-    <%= @task.completed %>
+    <%= if @task.completed do "yes" else "no" end %>
   </li>
 
-  <li>
-    <strong>Time taken:</strong>
-    <%= @task.time_taken %>
-  </li>
-
+  <%= if @task.completed do %>
+    <li>
+      <strong>Time taken:</strong>
+      <%= @task.time_taken %>
+    </li>
+  <% end %>
+  
 </ul>
 
 <span><%= link "Edit", to: Routes.task_path(@conn, :edit, @task) %></span>
