@@ -32,6 +32,9 @@
              <% end %>
            </div>
          <% end %>
+         <div class="col">
+           <%= link "Home", to: "/" %>
+         </div>
        </div>
     </header>
     <main role="main" class="container">
