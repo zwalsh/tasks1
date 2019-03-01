@@ -1,4 +1,4 @@
-<h1>Listing Tasks</h1>
+<h1>Listing Tasks <%= if @for_user do %>for User: <%= @email %> <% end %></h1>
 
 <table>
   <thead>

@@ -20,7 +20,9 @@ defmodule Tasks1Web.Router do
     get "/", PageController, :index
 
     resources "/users", UserController
+    get "/tasks/personal", TaskController, :personal_tasks
     resources "/tasks", TaskController
+
     # taken from Nat Tuck's users impl: https://khoury.neu.edu/~ntuck/courses/2019/01/cs4550/notes/11-add-users/notes.html
     resources "/sessions", SessionController, only: [:create, :delete], singleton: true
   end

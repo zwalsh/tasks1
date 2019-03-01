@@ -21,6 +21,12 @@ defmodule Tasks1.Tasks do
     Repo.all(Task)
   end
 
+  def list_tasks_for_user(user_id) do
+    q = from t in Task,
+      where: t.assignee_id == ^user_id
+    Repo.all(q)
+  end
+
   @doc """
   Gets a single task.
 

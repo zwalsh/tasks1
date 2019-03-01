@@ -4,13 +4,37 @@ defmodule Tasks1Web.TaskController do
   alias Tasks1.Tasks
   alias Tasks1.Tasks.Task
 
+  def personal_tasks(conn, params) do
+    IO.inspect params
+    user = Map.get(params, "user_id")
+      |> case do
+          nil -> conn.assigns[:current_user]
+          id -> Tasks1.Users.get_user(id)
+        end
+
+    if user do
+      IO.inspect user
+      tasks = Tasks.list_tasks_for_user(user.id)
+      conn = conn
+      |> assign(:for_user, true)
+      |> assign(:email, user.email)
+
+      render(conn, "index.html", tasks: tasks)
+    else
+      conn
+      |> redirect(to: Routes.task_path(conn, :index))
+    end
+  end
+
   def index(conn, _params) do
     tasks = Tasks.list_tasks()
+    conn = assign(conn, :for_user, false)
     render(conn, "index.html", tasks: tasks)
   end
 
   def new(conn, _params) do
     changeset = Tasks.change_task(%Task{})
+    conn = assign(conn, :users, Tasks1.Users.list_users())
     render(conn, "new.html", changeset: changeset)
   end
 
@@ -22,6 +46,7 @@ defmodule Tasks1Web.TaskController do
         |> redirect(to: Routes.task_path(conn, :show, task))
 
       {:error, %Ecto.Changeset{} = changeset} ->
+        conn = assign(conn, :users, Tasks1.Users.list_users())
         render(conn, "new.html", changeset: changeset)
     end
   end
