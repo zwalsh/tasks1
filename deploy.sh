@@ -1,7 +1,7 @@
 #!/bin/bash
 
 export MIX_ENV=prod
-export PORT=4794
+export PORT=4795
 export NODEBIN=`pwd`/assets/node_modules/.bin
 export PATH="$PATH:$NODEBIN"
 
@@ -24,5 +24,5 @@ mix release
 
 echo "Starting app..."
 
-_build/prod/rel/tasks1/bin/tasks1 foreground
+_build/prod/rel/tasks2/bin/tasks2 foreground
 

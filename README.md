@@ -1,4 +1,4 @@
-# Tasks1
+# Tasks
 
 This is a task tracker app! Here are some of the design decisions I made:
 

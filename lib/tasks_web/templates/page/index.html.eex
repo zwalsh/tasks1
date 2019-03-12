@@ -1,0 +1,25 @@
+<%= if @current_user do %>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+  <%= render TasksWeb.TaskView, "index.html",
+      tasks: Tasks.Tasks.list_tasks_for_user(@current_user.id),
+      for_user: true, email: @current_user.email, conn: @conn %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <h1>Helpful Links</h1>
+      </div>
+    </div>
+    <div class="row">
+      <ul>
+        <li><%= link "See all users", to: Routes.user_path(@conn, :index) %></li>
+        <li><%= link "See all tasks", to: Routes.task_path(@conn, :index) %></li>
+      </ul>
+    </div>
+  </div>
+<% else %>
+  <h1>Register or Log In to start Tracking Tasks!</h1>
+  <%= link "Register", to: Routes.user_path(@conn, :new) %>
+<% end %>
