@@ -13,5 +13,7 @@
 alias Tasks.Repo
 alias Tasks.Users.User
 
-Repo.insert!(%User{email: "alice@example.com"})
-Repo.insert!(%User{email: "bob@example.com"})
+alice = %User{email: "alice@example.com", is_manager: true}
+Repo.insert!(alice)
+alice = Tasks.Users.get_user_by_email("alice@example.com")
+Repo.insert!(%User{email: "bob@example.com", manager_id: alice.id})

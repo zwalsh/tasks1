@@ -9,6 +9,13 @@
   <%= text_input f, :email %>
   <%= error_tag f, :email %>
 
+  <div class="form-group">
+    <%= label f, :manager %>
+    <%= select f, :manager_id, Enum.map(@managers, &{&1.email, &1.id}),
+      [class: "form-control custom-select", prompt: "Choose manager"] %>
+    <%= error_tag f, :manager %>
+  </div>
+
   <div>
     <%= submit "Save" %>
   </div>
