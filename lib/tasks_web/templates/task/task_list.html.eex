@@ -4,7 +4,6 @@
       <th>Title</th>
       <th>Description</th>
       <th>Completed</th>
-      <th>Time taken</th>
 
       <th></th>
     </tr>
@@ -15,7 +14,6 @@
       <td><%= task.title %></td>
       <td><%= task.desc %></td>
       <td><%= if task.completed do "yes" else "no" end %></td>
-      <td><%= if task.completed do task.time_taken else "-" end %></td>
 
       <td>
         <%= link "Show", to: Routes.task_path(@conn, :show, task) %>
