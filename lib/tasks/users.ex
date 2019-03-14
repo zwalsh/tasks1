@@ -28,7 +28,13 @@ defmodule Tasks.Users do
 
   def list_underlings(manager_id) do
     Repo.all(from u in User,
-              where: u.manager_id == ^manager_id)
+              where: u.manager_id == ^manager_id,
+              preload: :manager)
+  end
+
+  def underling_tasks(manager) do
+    list_underlings(manager.id)
+    |> Enum.flat_map(&(Tasks.Tasks.list_tasks_for_user(&1.id)))
   end
 
   @doc """
@@ -55,7 +61,9 @@ defmodule Tasks.Users do
   def get_user(id), do: Repo.get(User, id, preload: [:manager])
 
   def get_user_by_email(email) do
-    Repo.get_by(User, email: email, preload: [:manager])
+    Repo.one(from u in User,
+              where: u.email == ^email,
+              preload: [:manager])
   end
 
   @doc """

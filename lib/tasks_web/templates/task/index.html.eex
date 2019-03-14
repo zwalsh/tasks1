@@ -1,32 +1,8 @@
 <h1>Listing Tasks <%= if @for_user do %>for User: <%= @email %> <% end %></h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Completed</th>
-      <th>Time taken</th>
-
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-<%= for task <- @tasks do %>
-    <tr>
-      <td><%= task.title %></td>
-      <td><%= task.desc %></td>
-      <td><%= if task.completed do "yes" else "no" end %></td>
-      <td><%= if task.completed do task.time_taken else "-" end %></td>
-
-      <td>
-        <%= link "Show", to: Routes.task_path(@conn, :show, task) %>
-        <%= link "Edit", to: Routes.task_path(@conn, :edit, task) %>
-        <%= link "Delete", to: Routes.task_path(@conn, :delete, task), method: :delete, data: [confirm: "Are you sure?"] %>
-      </td>
-    </tr>
-<% end %>
-  </tbody>
-</table>
+<%= render TasksWeb.TaskView, "task_list.html",
+  conn: @conn,
+  user: @for_user,
+  tasks: @tasks %>
 
 <span><%= link "New Task", to: Routes.task_path(@conn, :new) %></span>

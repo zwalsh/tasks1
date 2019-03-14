@@ -13,8 +13,14 @@
   <li>
     <%= link "User's Tasks", to: "/tasks/personal?user_id=#{@user.id}" %>
   </li>
-
+  <li>
+    <%= link "Edit", to: Routes.user_path(@conn, :edit, @user) %>
+  </li>
+  <li>
+    <span><%= link "Back", to: Routes.user_path(@conn, :index) %></span>  
+  </li>
 </ul>
 
-<span><%= link "Edit", to: Routes.user_path(@conn, :edit, @user) %></span>
-<span><%= link "Back", to: Routes.user_path(@conn, :index) %></span>
+<%= if @user.is_manager do
+  render TasksWeb.UserView, "manager_section.html", user: @user, conn: @conn
+end %>

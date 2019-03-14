@@ -1,37 +1,5 @@
 <h1>Listing Users</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Email</th>
-      <th>Manager</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-<%= for user <- @users do %>
-    <tr>
-      <td><%= user.email %></td>
-      <td><%= if user.manager do user.manager.email else "No manager" end  %></td>
-
-      <td>
-        <%= link "Show", to: Routes.user_path(@conn, :show, user) %>
-      </td>
-      <td>
-        <%= link "Edit", to: Routes.user_path(@conn, :edit, user) %>
-      </td>
-      <td>
-        <%= link "Delete", to: Routes.user_path(@conn, :delete, user), method: :delete, data: [confirm: "Are you sure?"] %>
-      </td>
-      <td>
-        <%= link "Tasks", to: "/tasks/personal?user_id=#{user.id}" %>
-      </td>
-    </tr>
-<% end %>
-  </tbody>
-</table>
+<%= render TasksWeb.UserView, "user_list.html", users: @users, conn: @conn %>
 
 <span><%= link "New User", to: Routes.user_path(@conn, :new) %></span>

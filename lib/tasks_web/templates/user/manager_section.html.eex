@@ -1,0 +1,14 @@
+<h2>Underlings</h2>
+<%= render TasksWeb.UserView, "user_list.html",
+  user: @user,
+  users: Tasks.Users.list_underlings(@user.id),
+  conn: @conn
+%>
+<h2>Task Report</h2>
+<%= for user <- Tasks.Users.list_underlings(@user.id) do %>
+  <h3>Tasks for User: <%= user.email %></h3>
+    <%= render TasksWeb.TaskView, "task_list.html",
+      user: @user,
+      conn: @conn,
+      tasks: Tasks.Tasks.list_tasks_for_user(user.id) %>
+<%= end %>
