@@ -9,6 +9,7 @@ defmodule Tasks.Tasks.Task do
     field :time_taken, :integer
     field :title, :string
     belongs_to :assignee, Tasks.Users.User, foreign_key: :assignee_id
+    has_many :tasks, Tasks.TimeBlocks.TimeBlock, on_delete: :delete_all
 
     timestamps()
   end

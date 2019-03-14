@@ -7,11 +7,11 @@
 # General application configuration
 use Mix.Config
 
-config :tasks2,
+config :tasks,
   ecto_repos: [Tasks.Repo]
 
 # Configures the endpoint
-config :tasks2, TasksWeb.Endpoint,
+config :tasks, TasksWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "5dsjGSCxOYCIWWubK6pBkt+nSZIlgkzcNJNVFdIbHO1Aja2lvZiSa6vmrYtuZc9B",
   render_errors: [view: TasksWeb.ErrorView, accepts: ~w(html json)],

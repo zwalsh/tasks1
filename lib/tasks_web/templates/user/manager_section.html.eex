@@ -11,4 +11,4 @@
       user: @user,
       conn: @conn,
       tasks: Tasks.Tasks.list_tasks_for_user(user.id) %>
-<%= end %>
+<% end %>

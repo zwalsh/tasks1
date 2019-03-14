@@ -25,6 +25,8 @@ defmodule TasksWeb.Router do
 
     # taken from Nat Tuck's users impl: https://khoury.neu.edu/~ntuck/courses/2019/01/cs4550/notes/11-add-users/notes.html
     resources "/sessions", SessionController, only: [:create, :delete], singleton: true
+
+    resources "/time_blocks", TimeBlockController, except: [:new, :edit]
   end
 
   # Other scopes may use custom stacks.

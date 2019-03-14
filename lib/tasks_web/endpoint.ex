@@ -1,5 +1,5 @@
 defmodule TasksWeb.Endpoint do
-  use Phoenix.Endpoint, otp_app: :tasks2
+  use Phoenix.Endpoint, otp_app: :tasks
 
   socket "/socket", TasksWeb.UserSocket,
     websocket: true,
@@ -11,7 +11,7 @@ defmodule TasksWeb.Endpoint do
   # when deploying your static files in production.
   plug Plug.Static,
     at: "/",
-    from: :tasks2,
+    from: :tasks,
     gzip: false,
     only: ~w(css fonts images js favicon.ico robots.txt)
 
@@ -39,7 +39,7 @@ defmodule TasksWeb.Endpoint do
   # Set :encryption_salt if you would also like to encrypt it.
   plug Plug.Session,
     store: :cookie,
-    key: "_tasks2_key",
+    key: "_tasks_key",
     signing_salt: "nPPoAwkg"
 
   plug TasksWeb.Router
