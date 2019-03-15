@@ -2,15 +2,13 @@
 
 This is a task tracker app! Here are some of the design decisions I made:
 
-- adding an assignee involves selecting a user from a dropdown
-  - this means that all users must be fetched to edit a task...
-   hopefully my app does not become too popular
+- a user has a manager flag that determines if they are able to manage
+underlings. Rather than adding some permissions around this flag, I just made
+it an editable field of the user
 
-- I decided not to add a separate "complete" feature, so completing a task means
-manually editing it, checking the completed box, and setting time_taken.
+- there is a "manager" section that is a separate template that I render
+both on the home page and on the user's page, if they are a manager. It
+includes their underlings and the task report for those underlings
 
-- it is also necessary to always input a time taken, even when creating the
-task. I could not find a good way to separate those concerns.
-
-- It *is* possible to view all of an individual user's tasks through /tasks/personal, and that
-path accepts a parameter of user_id. That is linked on the Users page as well.
+- this task tracker currently does not support direct input of the
+time blocks for a task 😢
