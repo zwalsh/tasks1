@@ -12,6 +12,7 @@ defmodule TasksWeb.TimeBlockView do
 
   def render("time_block.json", %{time_block: time_block}) do
     %{id: time_block.id,
+      task_id: time_block.task_id,
       start: time_block.start,
       end: time_block.end}
   end

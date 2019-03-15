@@ -1,0 +1,10 @@
+<tr>
+  <td><%= @time_block.start %></td>
+  <%= if @time_block.end do %>
+    <td> <%= @time_block.end %> </td>
+  <% else %>
+    <td id="endCell"><button id="endBlock"
+      data-block-id=<%= @time_block.id %>
+      className="btn btn-primary">Finish</button></td>
+  <% end %>
+</tr>

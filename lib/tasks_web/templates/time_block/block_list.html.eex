@@ -1,0 +1,20 @@
+<table>
+  <thead>
+    <th>Start</th>
+    <th>End</th>
+  </thead>
+  <tbody>
+    <%= for block <- @time_blocks do
+      render TasksWeb.TimeBlockView, "show.html", time_block: block, task: @task
+    end %>
+    <%= if Enum.reduce(@time_blocks,
+                        true, fn block, acc -> acc && block.end end) do %>
+      <tr>
+        <td id="startCell">
+          <button className="btn btn-primary" id="startBlock">Start</button>
+        </td>
+        <td id="endCell"/>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
