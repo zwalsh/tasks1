@@ -34,7 +34,7 @@ class Server {
     );
   }
 
-  create_session(email, password) {
+  login(email, password) {
     this.post(
       "/api/v1/auth",
       {email, password},

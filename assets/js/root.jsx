@@ -34,7 +34,7 @@ class Root extends React.Component {
           <div className="row">
             <div className="col-8">
               <Route path="/" exact={true} render={() =>
-                <Header />
+                <UserList />
               } />
               <Route path="/users" exact={true} render={() =>
                 <UserList />

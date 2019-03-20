@@ -18,21 +18,13 @@ defmodule TasksWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
-
-    resources "/users", UserController
-    get "/tasks/personal", TaskController, :personal_tasks
-    resources "/tasks", TaskController
-
-    # taken from Nat Tuck's users impl: https://khoury.neu.edu/~ntuck/courses/2019/01/cs4550/notes/11-add-users/notes.html
-    resources "/sessions", SessionController, only: [:create, :delete], singleton: true
-
-    get "/time_blocks/new", TimeBlockController, :new
-    get "/time_blocks/end_block", TimeBlockController, :end_block
-    resources "/time_blocks", TimeBlockController, except: [:new, :edit]
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", TasksWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", TasksWeb do
+     pipe_through :api
+
+     resources "/users", UserController, except: [:new, :edit]
+     resources "/tasks", TaskController, except: [:new, :edit]
+     post "/auth", AuthController, :authenticate
+   end
 end
