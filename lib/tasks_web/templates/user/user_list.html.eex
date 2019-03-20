@@ -2,7 +2,6 @@
   <thead>
     <tr>
       <th>Email</th>
-      <th>Manager</th>
       <th></th>
       <th></th>
       <th></th>
@@ -13,7 +12,6 @@
 <%= for user <- @users do %>
     <tr>
       <td><%= user.email %></td>
-      <td><%= if user.manager do user.manager.email else "No manager" end  %></td>
 
       <td>
         <%= link "Show", to: Routes.user_path(@conn, :show, user) %>

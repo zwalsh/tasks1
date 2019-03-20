@@ -19,9 +19,6 @@
       </ul>
     </div>
   </div>
-  <%= if @current_user.is_manager do
-    render TasksWeb.UserView, "manager_section.html", user: @current_user, conn: @conn
-  end %>
 <% else %>
   <h1>Register or Log In to start Tracking Tasks!</h1>
   <%= link "Register", to: Routes.user_path(@conn, :new) %>

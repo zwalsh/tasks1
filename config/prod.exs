@@ -27,10 +27,10 @@ config :tasks, TasksWeb.Endpoint,
   root: ".",
   version: Application.spec(:phoenix_distillery, :vsn),
   http: [:inet6, port: {:system, "PORT"}],
-  url: [host: "tasks2.zachwal.sh", port: 80],
+  url: [host: "tasks3.zachwal.sh", port: 80],
   cache_static_manifest: "priv/static/cache_manifest.json",
   secret_key_base: get_secret.("key_base"),
-  password: get_secret.("tasks2")
+  password: get_secret.("tasks3")
 
 # Do not print debug messages in production
 config :logger, level: :info
@@ -40,7 +40,7 @@ config :logger, level: :info
 # To get SSL working, you will need to add the `https` key
 # to the previous section and set your `:url` port to 443:
 #
-#     config :tasks2, TasksWeb.Endpoint,
+#     config :tasks3, TasksWeb.Endpoint,
 #       ...
 #       url: [host: "example.com", port: 443],
 #       https: [
@@ -64,7 +64,7 @@ config :logger, level: :info
 # We also recommend setting `force_ssl` in your endpoint, ensuring
 # no data is ever sent via http, always redirecting to https:
 #
-#     config :tasks2, TasksWeb.Endpoint,
+#     config :tasks3, TasksWeb.Endpoint,
 #       force_ssl: [hsts: true]
 #
 # Check `Plug.SSL` for all available options in `force_ssl`.
@@ -79,7 +79,7 @@ config :logger, level: :info
 # Alternatively, you can configure exactly which server to
 # start per endpoint:
 #
-#     config :tasks2, TasksWeb.Endpoint, server: true
+#     config :tasks3, TasksWeb.Endpoint, server: true
 #
 # Note you can't rely on `System.get_env/1` when using releases.
 # See the releases documentation accordingly.
@@ -89,8 +89,8 @@ config :logger, level: :info
 
 # Configure your database
 config :tasks, Tasks.Repo,
-  username: "tasks2",
+  username: "tasks3",
   password: "NfFKPy9nocHo5Nh9hiU3zYtJ32ABN9",
-  database: "tasks2",
+  database: "tasks3",
   hostname: "localhost",
   pool_size: 10

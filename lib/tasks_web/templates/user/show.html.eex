@@ -7,17 +7,13 @@
     <%= @user.email %>
   </li>
   <li>
-    <strong>Manager:</strong>
-    <%= if @user.manager do @user.manager.email else "No manager" end  %>
-  </li>
-  <li>
     <%= link "User's Tasks", to: "/tasks/personal?user_id=#{@user.id}" %>
   </li>
   <li>
     <%= link "Edit", to: Routes.user_path(@conn, :edit, @user) %>
   </li>
   <li>
-    <span><%= link "Back", to: Routes.user_path(@conn, :index) %></span>  
+    <span><%= link "Back", to: Routes.user_path(@conn, :index) %></span>
   </li>
 </ul>
 

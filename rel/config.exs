@@ -47,7 +47,7 @@ end
 # will be used by default
 
 release :tasks do
-  set version: current_version(:tasks2)
+  set version: current_version(:tasks3)
   set applications: [
     :runtime_tools
   ]

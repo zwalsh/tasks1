@@ -1,11 +1,11 @@
 #!/bin/bash
 
 export MIX_ENV=prod
-export PORT=4795
+export PORT=4796
 
 echo "Stopping old copy of app, if any..."
 
-_build/prod/rel/tasks2/bin/tasks2 stop || true
+_build/prod/rel/tasks3/bin/tasks3 stop || true
 
 echo "Starting app..."
 
@@ -13,5 +13,4 @@ echo "Starting app..."
 #_build/prod/rel/memory/bin/memory start
 
 # Foreground for testing and for systemd
-_build/prod/rel/tasks2/bin/tasks2 foreground
-
+_build/prod/rel/tasks3/bin/tasks3 foreground

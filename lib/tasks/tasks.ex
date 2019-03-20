@@ -23,8 +23,7 @@ defmodule Tasks.Tasks do
 
   def list_tasks_for_user(user_id) do
     q = from t in Task,
-      where: t.assignee_id == ^user_id,
-      preload: [:time_blocks]
+      where: t.assignee_id == ^user_id
     Repo.all(q)
   end
 
@@ -48,7 +47,7 @@ defmodule Tasks.Tasks do
   def get_task(id) do
     q = from t in Task,
         where: t.id == ^id,
-        preload: [:assignee, :time_blocks]
+        preload: [:assignee]
     Repo.one(q)
   end
 

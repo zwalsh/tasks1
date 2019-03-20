@@ -18,23 +18,7 @@ defmodule Tasks.Users do
 
   """
   def list_users do
-    Repo.all(from u in User, preload: :manager)
-  end
-
-  def list_managers do
-    Repo.all(from u in User,
-              where: u.is_manager)
-  end
-
-  def list_underlings(manager_id) do
-    Repo.all(from u in User,
-              where: u.manager_id == ^manager_id,
-              preload: :manager)
-  end
-
-  def underling_tasks(manager) do
-    list_underlings(manager.id)
-    |> Enum.flat_map(&(Tasks.Tasks.list_tasks_for_user(&1.id)))
+    Repo.all(from u in User)
   end
 
   @doc """
@@ -53,17 +37,15 @@ defmodule Tasks.Users do
   """
   def get_user!(id) do
     Repo.one!(from u in User,
-      where: u.id == ^id,
-      preload: [:manager])
+      where: u.id == ^id)
   end
 
   # taken from Nat Tuck's users impl: https://khoury.neu.edu/~ntuck/courses/2019/01/cs4550/notes/11-add-users/notes.html
-  def get_user(id), do: Repo.get(User, id, preload: [:manager])
+  def get_user(id), do: Repo.get(User, id)
 
   def get_user_by_email(email) do
     Repo.one(from u in User,
-              where: u.email == ^email,
-              preload: [:manager])
+              where: u.email == ^email)
   end
 
   @doc """

@@ -11,8 +11,7 @@ defmodule TasksWeb.UserController do
 
   def new(conn, _params) do
     changeset = Users.change_user(%User{})
-    managers = Users.list_managers()
-    render(conn, "new.html", managers: managers, changeset: changeset)
+    render(conn, "new.html", changeset: changeset)
   end
 
   def create(conn, %{"user" => user_params}) do
@@ -36,9 +35,7 @@ defmodule TasksWeb.UserController do
   def edit(conn, %{"id" => id}) do
     user = Users.get_user!(id)
     changeset = Users.change_user(user)
-    managers = Users.list_managers()
-    render(conn, "edit.html", user: user,
-      managers: managers, changeset: changeset)
+    render(conn, "edit.html", user: user, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "user" => user_params}) do
@@ -51,8 +48,7 @@ defmodule TasksWeb.UserController do
         |> redirect(to: Routes.user_path(conn, :show, user))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        managers = Users.list_managers()
-        render(conn, "edit.html", user: user, managers: managers, changeset: changeset)
+        render(conn, "edit.html", user: user, changeset: changeset)
     end
   end
 

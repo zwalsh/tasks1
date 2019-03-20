@@ -19,7 +19,5 @@
 </ul>
 <script>window.taskId = <%= @task.id %> </script>
 
-<%= render TasksWeb.TimeBlockView, "block_list.html",
-      time_blocks: @task.time_blocks, task: @task %>
 <span><%= link "Edit", to: Routes.task_path(@conn, :edit, @task) %></span>
 <span><%= link "Back", to: Routes.task_path(@conn, :index) %></span>

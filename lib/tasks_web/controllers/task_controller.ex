@@ -37,7 +37,6 @@ defmodule TasksWeb.TaskController do
     current_user = conn.assigns[:current_user]
 
     changeset = Tasks.change_task(%Task{})
-    conn = assign(conn, :users, Users.list_underlings(current_user.id))
     render(conn, "new.html", changeset: changeset)
   end
 
@@ -49,8 +48,6 @@ defmodule TasksWeb.TaskController do
         |> redirect(to: Routes.task_path(conn, :show, task))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        current_user = conn.assigns[:current_user]
-        conn = assign(conn, :users, Users.list_underlings(current_user.id))
         render(conn, "new.html", changeset: changeset)
     end
   end
@@ -69,10 +66,8 @@ defmodule TasksWeb.TaskController do
   def edit(conn, %{"id" => id}) do
     task = Tasks.get_task(id)
     if task do
-      current_user = conn.assigns[:current_user]
       changeset = Tasks.change_task(task)
-      render(conn, "edit.html", task: task, changeset: changeset,
-          users: Users.list_underlings(current_user.id))
+      render(conn, "edit.html", task: task, changeset: changeset)
     else
       conn
       |> put_flash(:error, "Task with id: #{id} does not exist")
