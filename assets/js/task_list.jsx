@@ -16,7 +16,7 @@ function TaskList(props) {
             <th>Title</th>
             <th>Description</th>
             <th>Completed?</th>
-            <th style={{width: 50}}>Time taken</th>
+            <th>Time taken</th>
             <th>Assignee</th>
             <th>Submit</th>
           </tr>
@@ -91,6 +91,7 @@ function NewTask(props) {
         onChange={updateTaskForm}
         placeholder="Time (in minutes, 15-min increments)"
         type="number"
+        style={{width: 100}}
         step="15"/>
     </td>
     <td>
