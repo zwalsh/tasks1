@@ -5,8 +5,9 @@ import { connect } from 'react-redux';
 import api from './api';
 import store from './store';
 
-export default connect(({tasks, task_form}) => { return {tasks, task_form};})((props) => {
+function TaskList(props) {
   let rows = _.map(props.tasks, (t) => <Task key={t.id} task={t} />);
+  let task_form = props.task_form;
   return <div className="row">
     <div className="col-12">
       <table className="table table-striped">
@@ -15,19 +16,19 @@ export default connect(({tasks, task_form}) => { return {tasks, task_form};})((p
             <th>Title</th>
             <th>Description</th>
             <th>Completed?</th>
-            <th>Time taken</th>
+            <th style={{width: 50}}>Time taken</th>
             <th>Assignee</th>
             <th>Submit</th>
           </tr>
         </thead>
         <tbody>
           {rows}
-          <NewTask props={props.task_form} />
+          <NewTask task_form={task_form}/>
         </tbody>
       </table>
     </div>
   </div>;
-});
+}
 
 function Task(props) {
   let {task} = props;
@@ -37,7 +38,21 @@ function Task(props) {
     <td>{task.completed ? "Yes" : "No"}</td>
     <td>{task.time_taken}</td>
     <td>{task.assignee.email}</td>
+    <td><button onClick={() => editTask(task)}>Edit</button></td>
   </tr>;
+}
+
+function editTask(task) {
+  api.deleteTask(task.id);
+  let form = _.assign({}, task, {assignee: task.assignee.email});
+  store.dispatch({
+    type: 'UPDATE_TASK_FORM',
+    data: form
+  });
+  store.dispatch({
+    type: 'REMOVE_TASK',
+    data: task,
+  });
 }
 
 function updateTaskForm(ev) {
@@ -50,7 +65,7 @@ function updateTaskForm(ev) {
 }
 
 function NewTask(props) {
-  let {title, description, completed, assignee, time_taken} = props;
+  let {title, description, completed, assignee, time_taken} = props.task_form;
   return <tr>
     <td>
       <input id="title"
@@ -75,7 +90,8 @@ function NewTask(props) {
         value={time_taken}
         onChange={updateTaskForm}
         placeholder="Time (in minutes, 15-min increments)"
-        type="number"/>
+        type="number"
+        step="15"/>
     </td>
     <td>
       <input id="assignee"
@@ -88,3 +104,12 @@ function NewTask(props) {
     </td>
   </tr>;
 }
+
+function stateToProps(state) {
+  return {
+    tasks: state.tasks,
+    task_form: state.task_form,
+  }
+}
+
+export default connect(stateToProps)(TaskList);

@@ -16,6 +16,8 @@ function tasks(state = [], action) {
       return action.data;
     case 'NEW_TASK':
       return state.concat(action.data);
+    case 'REMOVE_TASK':
+      return _.filter(state, (t) => t != action.data);
     default:
       return state;
   }
@@ -42,7 +44,7 @@ function login_form(state = login_form0, action) {
   }
 }
 
-let task_form0 = {title: "", description: "", completed: false, assignee: ""}
+let task_form0 = {title: "", description: "", completed: false, assignee: "", time_taken: 0}
 function task_form(state = task_form0, action) {
   switch (action.type) {
     case 'UPDATE_TASK_FORM':

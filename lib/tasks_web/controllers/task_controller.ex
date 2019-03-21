@@ -30,15 +30,12 @@ defmodule TasksWeb.TaskController do
 
   def index(conn, _params) do
     tasks = Tasks.list_tasks()
-    IO.inspect tasks
     conn = assign(conn, :for_user, false)
     render(conn, "index.json", tasks: tasks)
   end
 
   def create(conn, %{"task" => task_params}) do
     email = task_params["assignee"]
-    IO.puts email
-
     user = Users.get_user_by_email(email)
     task_params = Map.put(task_params, "assignee_id", user.id)
 
@@ -73,7 +70,7 @@ defmodule TasksWeb.TaskController do
     task = Tasks.get_task!(id)
     with {:ok, _task} <- Tasks.delete_task(task) do
       conn
-      |> put_flash(:info, "Task deleted successfully.")
+      |> send_resp(200, "deleted")
     end
   end
 end

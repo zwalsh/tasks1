@@ -22,6 +22,16 @@ class Server {
     });
   }
 
+  delete(path, callback) {
+    $.ajax(path, {
+      method: "delete",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      data: "",
+      success: callback,
+    })
+  }
+
   fetch_users() {
     this.get(
       "/api/users",
@@ -61,6 +71,10 @@ class Server {
     );
   }
 
+  deleteTask(id) {
+    this.delete("/api/tasks/" + id);
+  }
+
   createTask() {
     let task_form = store.getState().task_form;
     let data = {
@@ -69,13 +83,13 @@ class Server {
         "desc": task_form.description,
         "completed": false,
         "assignee": task_form.assignee,
+        "time_taken": task_form.time_taken
       }
     }
     this.post(
       "/api/tasks",
       data,
       (resp) => {
-        console.log(resp);
         store.dispatch({
           type: 'NEW_TASK',
           data: resp.data,

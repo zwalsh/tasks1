@@ -13,6 +13,7 @@ defmodule TasksWeb.TaskView do
     %{id: task.id,
       description: task.desc,
       title: task.title,
+      time_taken: task.time_taken,
       assignee: render_one(task.assignee, TasksWeb.UserView, "user.json")}
   end
 end
