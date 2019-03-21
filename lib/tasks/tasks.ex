@@ -18,7 +18,10 @@ defmodule Tasks.Tasks do
 
   """
   def list_tasks do
-    Repo.all(Task)
+    q = from t in Task,
+      preload: [:assignee]
+      
+    Repo.all(q)
   end
 
   def list_tasks_for_user(user_id) do

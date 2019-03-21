@@ -4,15 +4,22 @@ import _ from 'lodash';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import api from './api';
+import store from './store';
 
 function Header(props) {
-  let {session} = props;
+  let {session, email, password} = props;
   let session_info;
   if (session == null) {
     session_info = <div className="form-inline my-2">
-      <input id="email" type="email" placeholder="email" />
-      <input id="password" type="password" placeholder="password" />
-      <button className="btn btn-secondary" onClick={login}>Login</button>
+      <input type="email"
+              placeholder="email"
+              value={email}
+              onChange={updateEmail}/>
+      <input type="password"
+              placeholder="password"
+              value={password}
+              onChange={updatePassword}/>
+      <button className="btn btn-secondary" onClick={api.login.bind(api)}>Login</button>
     </div>;
   }
   else {
@@ -29,6 +36,9 @@ function Header(props) {
             <p>
               <Link to={"/users"}>Users</Link>
             </p>
+            <p>
+              <Link to={"/tasks"}>Tasks</Link>
+            </p>
           </div>
           <div className="col-4">
             {session_info}
@@ -36,14 +46,30 @@ function Header(props) {
         </div>;
 }
 
-function login() {
-  let email = $("#email")[0].value;
-  let pwd = $("#password")[0].value;
-  api.login(email, pwd);
+function updateEmail(ev) {
+  store.dispatch({
+    type: 'LOGIN_FORM_SET_EMAIL',
+    data: {
+      email: ev.target.value
+    }
+  });
+}
+
+function updatePassword(ev) {
+  store.dispatch({
+    type: 'LOGIN_FORM_SET_PASSWORD',
+    data: {
+      email: ev.target.value
+    }
+  });
 }
 
 function state2props(state) {
-  return { session: state.session };
+  return {
+    session: state.session,
+    email: state.login_form.email,
+    password: state.login_form.password
+  };
 }
 
 export default connect(state2props)(Header);

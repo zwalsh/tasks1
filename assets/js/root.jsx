@@ -24,6 +24,8 @@ class Root extends React.Component {
     super(props);
 
     // do API calls here to initialize state
+    api.fetch_users();
+    api.fetch_tasks();
   }
 
   render() {
@@ -32,7 +34,7 @@ class Root extends React.Component {
         <div>
           <Header />
           <div className="row">
-            <div className="col-8">
+            <div className="col-12">
               <Route path="/" exact={true} render={() =>
                 <UserList />
               } />

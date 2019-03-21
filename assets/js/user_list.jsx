@@ -10,7 +10,7 @@ export default connect(({users}) => { return {users};})((props) => {
       <table className="table table-striped">
         <thead>
           <tr>
-            <th>email</th>
+            <th>Email</th>
           </tr>
         </thead>
         <tbody>

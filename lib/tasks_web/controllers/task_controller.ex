@@ -1,6 +1,7 @@
 defmodule TasksWeb.TaskController do
   use TasksWeb, :controller
 
+  alias Tasks.Repo
   alias Tasks.Users
   alias Tasks.Tasks
   alias Tasks.Task
@@ -29,14 +30,21 @@ defmodule TasksWeb.TaskController do
 
   def index(conn, _params) do
     tasks = Tasks.list_tasks()
+    IO.inspect tasks
     conn = assign(conn, :for_user, false)
     render(conn, "index.json", tasks: tasks)
   end
 
   def create(conn, %{"task" => task_params}) do
+    email = task_params["assignee"]
+    IO.puts email
+
+    user = Users.get_user_by_email(email)
+    task_params = Map.put(task_params, "assignee_id", user.id)
+
     with {:ok, task} <- Tasks.create_task(task_params) do
+      task = Repo.preload(task, :assignee)
       conn
-      |> put_flash(:info, "Task created successfully.")
       |> render("show.json", task: task)
     end
   end
@@ -47,7 +55,7 @@ defmodule TasksWeb.TaskController do
       render(conn, "show.json", task: task)
     else
       conn
-      |> put_flash(:error, "Task with id: #{id} does not exist")
+      |> render(:error, "Task with id: #{id} does not exist")
     end
   end
 

@@ -24,7 +24,7 @@ class Server {
 
   fetch_users() {
     this.get(
-      "/api/v1/users",
+      "/api/users",
       (resp) => {
         store.dispatch({
           type: 'USER_LIST',
@@ -34,9 +34,23 @@ class Server {
     );
   }
 
-  login(email, password) {
+  fetch_tasks() {
+    this.get(
+      "/api/tasks",
+      (resp) => {
+        store.dispatch({
+          type: 'TASK_LIST',
+          data: resp.data,
+        });
+      }
+    )
+  }
+
+  login() {
+    let email = store.getState().login_form.email;
+    let password = store.getState().login_form.password;
     this.post(
-      "/api/v1/auth",
+      "/api/auth",
       {email, password},
       (resp) => {
         store.dispatch({
@@ -45,6 +59,29 @@ class Server {
         });
       }
     );
+  }
+
+  createTask() {
+    let task_form = store.getState().task_form;
+    let data = {
+      "task": {
+        "title": task_form.title,
+        "desc": task_form.description,
+        "completed": false,
+        "assignee": task_form.assignee,
+      }
+    }
+    this.post(
+      "/api/tasks",
+      data,
+      (resp) => {
+        console.log(resp);
+        store.dispatch({
+          type: 'NEW_TASK',
+          data: resp.data,
+        })
+      }
+    )
   }
 }
 
