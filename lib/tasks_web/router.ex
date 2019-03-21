@@ -27,6 +27,6 @@ defmodule TasksWeb.Router do
 
      resources "/users", UserController, except: [:new, :edit]
      resources "/tasks", TaskController, except: [:new, :edit]
-     post "/auth", AuthController, :authenticate
+     post "/auth", SessionController, :create
    end
 end

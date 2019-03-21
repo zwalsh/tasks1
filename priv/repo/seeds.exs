@@ -13,6 +13,8 @@
 alias Tasks.Repo
 alias Tasks.Users.User
 
-alice = %User{email: "alice@example.com"}
+hash = Argon2.hash_pwd_salt("pass")
+
+alice = %User{email: "alice@example.com", password_hash: hash}
 Repo.insert!(alice)
-Repo.insert!(%User{email: "bob@example.com"})
+Repo.insert!(%User{email: "bob@example.com", password_hash: hash})

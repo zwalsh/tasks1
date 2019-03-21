@@ -12,8 +12,6 @@ defmodule TasksWeb.UserController do
   def create(conn, %{"user" => user_params}) do
     with {:ok, user} <- Users.create_user(user_params) do
       conn
-      |> put_session(:user_id, user.id)
-      |> put_flash(:info, "User created successfully.")
       |> render("show.json", user: user)
     end
   end

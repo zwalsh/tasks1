@@ -56,17 +56,32 @@ class Server {
     )
   }
 
-  login() {
-    let email = store.getState().login_form.email;
-    let password = store.getState().login_form.password;
+  login(user) {
+    if (!(user
+          && user.hasOwnProperty('email')
+          && user.hasOwnProperty('password'))) {
+       user = store.getState().login_form;
+    }
     this.post(
       "/api/auth",
-      {email, password},
+      user,
       (resp) => {
         store.dispatch({
           type: 'NEW_SESSION',
           data: resp.data,
         });
+      }
+    );
+  }
+
+  register() {
+    let user = _.assign({}, store.getState().login_form);
+    this.post(
+      "/api/users",
+      {user: user},
+      (resp) => {
+        this.login(user);
+        this.fetch_users();
       }
     );
   }

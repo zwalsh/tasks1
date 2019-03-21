@@ -27,6 +27,8 @@ function session(state = null, action) {
   switch (action.type) {
     case 'NEW_SESSION':
       return action.data;
+    case 'DELETE_SESSION':
+      return null;
     default:
       return state;
   }
@@ -39,6 +41,8 @@ function login_form(state = login_form0, action) {
       return _.assign({}, state, {email: action.data.email});
     case 'LOGIN_FORM_SET_PASSWORD':
       return _.assign({}, state, {password: action.data.password});
+    case 'NEW_SESSION':
+      return login_form0;
     default:
       return state;
   }

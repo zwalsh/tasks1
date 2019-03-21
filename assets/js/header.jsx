@@ -20,11 +20,13 @@ function Header(props) {
               value={password}
               onChange={updatePassword}/>
       <button className="btn btn-secondary" onClick={api.login.bind(api)}>Login</button>
+      <button className="btn btn-secondary" onClick={api.register.bind(api)}>Register</button>
     </div>;
   }
   else {
     session_info = <div className="my-2">
       <p>Logged in as {session.user_id}</p>
+      <button onClick={logout}>Logout</button>
     </div>
   }
 
@@ -46,6 +48,14 @@ function Header(props) {
         </div>;
 }
 
+function logout() {
+  console.log('logging out');
+  store.dispatch({
+    type: 'DELETE_SESSION',
+    data: {},
+  });
+}
+
 function updateEmail(ev) {
   store.dispatch({
     type: 'LOGIN_FORM_SET_EMAIL',
@@ -59,7 +69,7 @@ function updatePassword(ev) {
   store.dispatch({
     type: 'LOGIN_FORM_SET_PASSWORD',
     data: {
-      email: ev.target.value
+      password: ev.target.value
     }
   });
 }

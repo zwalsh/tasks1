@@ -5,6 +5,7 @@ defmodule Tasks.Users.User do
 
   schema "users" do
     field :email, :string
+    field :password_hash, :string
     has_many :tasks, Tasks.Tasks.Task, foreign_key: :assignee_id, on_delete: :nilify_all
 
     timestamps()
@@ -13,7 +14,7 @@ defmodule Tasks.Users.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:email])
+    |> cast(attrs, [:email, :password_hash])
     |> validate_required([:email])
   end
 end
