@@ -31,13 +31,13 @@ environment :dev do
   # dev mode.
   set dev_mode: true
   set include_erts: false
-  set cookie: :"r2)r_,r=US5Q3G^AkT>Rp3_fgxaf)8CGa8}p0Vp>BU!1CmlQ<.@Q2p8Bl13b5T1L"
+  set cookie: :"iDfZ2^XaHvevXAR_Tq8~Y`>|G*)MbAyU1{^)?Eitm<IEDUx=^5W8K8kI8v{^|hQC"
 end
 
 environment :prod do
   set include_erts: true
   set include_src: false
-  set cookie: :"[SJDIdwUi)e!@AfP8K?ChkLvZG|saQPCKI:t=46RzY(dm7/qGp/Bd}O19};YycCR"
+  set cookie: :"TN*%su<^JG)Y0EUh5IZCqN5UvMMcH^6aPCde3&@=BF5t$gSU!<|589fQ|uCiof9X"
   set vm_args: "rel/vm.args"
 end
 
@@ -47,8 +47,9 @@ end
 # will be used by default
 
 release :tasks do
-  set version: current_version(:tasks3)
+  set version: current_version(:tasks)
   set applications: [
     :runtime_tools
   ]
 end
+
